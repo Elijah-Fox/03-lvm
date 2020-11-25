@@ -4,6 +4,7 @@
 
 # команды
 pvcreate /dev/sdb
+
 vgcreate Lesson3 /dev/sdb
 
 ___________________________________
