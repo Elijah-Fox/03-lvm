@@ -6,6 +6,6 @@ README_1.MD
 # /home /var
 README_2.MD
 var_home.png
-#snap
+# snap
 README_3.MD
 snap.png
