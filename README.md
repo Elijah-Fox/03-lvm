@@ -1,7 +1,7 @@
 # 03-lvm
 otus 03 LVM
 # -> 8Gb (результат 8Gb.png)
-![результат 8Gb.png](/images/8GB.png)
+![результат 8Gb.png](https://github.com/Elijah-Fox/03-lvm/blob/main/images/8Gb.png)
 
 yum install lvm2 xfsdump nano
 
