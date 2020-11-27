@@ -131,7 +131,21 @@ rm -rf /home/*
 
 umount /mnt
 
-# snap
-README_3.MD
 
-snap.png
+# snap
+
+![результат snap.png](https://github.com/Elijah-Fox/03-lvm/blob/main/images/snap.png)
+
+*  Команды
+
+touch /home/file{1..5}
+
+lvcreate -L 5MB -s -n home_snap1 /dev/VolGroup00/LogVol_Home
+
+rm -f /home/file{1..3}
+
+umount /home
+
+lvconvert --merge /dev/VolGroup00/home_snap
+
+mount /home
