@@ -1,17 +1,20 @@
-lsblk
-yum install lvm2 xfsdump
-yum install device-mapper
+yum install lvm2 xfsdump nano
 
 pvcreate /dev/sdb
+
 vgcreate vg_tmp_root /dev/sdb
+
 lvcreate -n lv_tmp_root -l +100%FREE /dev/vg_tmp_root
 
 mkfs.xfs /dev/vg_tmp_root/lv_tmp_root
+
 mount /dev/vg_tmp_root/lv_tmp_root /mnt
 
 xfsdump -J - /dev/vg_tmp_root/lv_tmp_root | xfsrestore -J - /mnt
+
 for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done
 chroot /mnt/
+
 
 
 
@@ -42,17 +45,13 @@ cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initram
 
 nano /boot/grub2/grub.cfg
 
-Меняем все значения, которые задействуют старый том lvm — в моем случае, все совпадения:
+Меняем  все совпадения:
 
-...
-...  lv=VolGroup00/LogVol00 ...
-...
+lv=VolGroup00/LogVol00 
 
-... менялись на:
+меняем на:
 
-...
-... lv=vg_tmp_root/lv_tmp_root ...
-...
+lv=vg_tmp_root/lv_tmp_root
 
 exit
 
@@ -82,6 +81,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
 
 nano /boot/grub2/grub.cfg
+
 exit
 
 shutdown -r now
