@@ -149,3 +149,4 @@ umount /home
 lvconvert --merge /dev/VolGroup00/home_snap
 
 mount /home
+
